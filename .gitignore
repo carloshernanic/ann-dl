@@ -1,5 +1,12 @@
 site/
 env/
+.venv/
 .cache/
 .vscode/
 target/
+__pycache__/
+.ipynb_checkpoints/
+
+# Datasets are not versioned - see the report of each exercise for where to
+# download them from. Root-only, so docs/exercises/data/ is still tracked.
+/data/

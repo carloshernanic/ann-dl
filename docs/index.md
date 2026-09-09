@@ -1,100 +1,72 @@
-# Template de Entrega
+# Artificial Neural Networks & Deep Learning
 
+???+ info inline end "Edition"
 
-???+ info inline end "Edição"
+    2026.2 · Insper
 
-    2025.1
+Hi — I'm **Carlos Hernani**, an undergraduate student at Insper. This site is my
+notebook for the *Artificial Neural Networks and Deep Learning* course: every
+exercise I hand in, the code I actually ran to produce it, and the figures that
+came out of that code.
 
+Each report is self-contained. It states what was asked, shows the code, shows
+the figures, and then says what the results mean — so it can be read without
+opening a notebook, and re-run by anyone who clones the repo.
 
-## Grupo/Kit X
+## What's here
 
-1. João da Silva
-1. Pedro de Souza
-1. Maria Oliveira
-1. Grupo K
-    - João da Silva
-    - Pedro de Souza
+<div class="grid cards" markdown>
 
+- :material-chart-scatter-plot: **[Data](./exercises/data/index.md)**
 
+    Class separability in 2D, non-linearity in 5D, and preprocessing the
+    Spaceship Titanic dataset for `tanh` hidden units.
 
-!!! tip "Instruções"
+- :material-vector-line: **[Perceptron](./exercises/perceptron/index.md)**
 
-    Vocês devem utilizar este template como um bloco de notas para registrar o que foi feito e o que falta fazer. Vocês devem adicionar as informações necessárias.
-    O template deve ser editado e atualizado a cada entrega, registrando assim a data de entrega e o que foi feito até o momento via Git.
+    A single linear unit and the boundaries it can — and cannot — learn.
 
-## Entregas
+- :material-graph-outline: **[MLP](./exercises/mlp/index.md)**
 
-- [x] Roteiro 1 - Data 23/02/2025
-- [ ] Roteiro 2
-- [ ] Roteiro 3
-- [ ] Roteiro 4
-- [ ] Projeto
+    Hidden layers, backpropagation, and what depth buys over a single unit.
 
-## Diagramas
+- :material-shuffle-variant: **[VAE](./exercises/vae/index.md)**
 
-Use o [Mermaid](https://mermaid.js.org/intro/){:target='_blank'} para criar os diagramas de documentação.
+    Variational autoencoders: latent space, reconstruction and the KL term.
 
-[Mermaid Live Editor](https://mermaid.live/){:target='_blank'}
+</div>
 
+Longer work lives under **[Projects](./projects/index.md)**.
 
-``` mermaid
-flowchart TD
-    Deployment:::orange -->|defines| ReplicaSet
-    ReplicaSet -->|manages| pod((Pod))
-    pod:::red -->|runs| Container
-    Deployment -->|scales| pod
-    Deployment -->|updates| pod
+## Status
 
-    Service:::orange -->|exposes| pod
+- [x] Data
+- [ ] Perceptron
+- [ ] MLP
+- [ ] VAE
+- [ ] Project
 
-    subgraph  
-        ConfigMap:::orange
-        Secret:::orange
-    end
+## Running the code
 
-    ConfigMap --> Deployment
-    Secret --> Deployment
-    classDef red fill:#f55
-    classDef orange fill:#ffa500
+Everything in this repository runs from a single virtual environment:
+
+``` shell
+python -m venv env
+source ./env/bin/activate      # Windows: .\env\Scripts\activate
+python -m pip install -r requirements.txt --upgrade
 ```
 
+To serve this site locally:
 
+<!-- termynal -->
 
-## Códigos
+``` shell
+mkdocs serve -o
+```
 
-=== "De um arquivo remoto"
+## Source
 
-    ``` { .yaml .copy .select linenums='1' title="main.yaml" }
-    --8<-- "https://raw.githubusercontent.com/hsandmann/documentation.template/refs/heads/main/.github/workflows/main.yaml"
-    ```
-
-=== "Anotações no código"
-
-    ``` { .yaml title="compose.yaml" }
-    name: app
-
-        db:
-            image: postgres:17
-            environment:
-                POSTGRES_DB: ${POSTGRES_DB:-projeto} # (1)!
-                POSTGRES_USER: ${POSTGRES_USER:-projeto}
-                POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-projeto}
-            ports:
-                - 5432:5432 #(2)!
-    ```
-
-    1.  Caso a variável de ambiente `POSTGRES_DB` não exista ou seja nula - não seja definida no arquivo `.env` - o valor padrão será `projeto`. Vide [documentação](https://docs.docker.com/reference/compose-file/interpolation/){target='_blank'}.
-
-    2. Aqui é feito um túnel da porta 5432 do container do banco de dados para a porta 5432 do host (no caso localhost). Em um ambiente de produção, essa porta não deve ser exposta, pois ninguém de fora do compose deveria acessar o banco de dados diretamente.
-
-
-## Exemplo de vídeo
-
-Lorem ipsum dolor sit amet
-
-<iframe width="100%" height="470" src="https://www.youtube.com/embed/3574AYQml8w" allowfullscreen></iframe>
-
-
-## Referências
-
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/){:target='_blank'}
+The repository is at
+[github.com/carloshernanic/ann-dl](https://github.com/carloshernanic/ann-dl){:target="_blank"}.
+Reports live in `docs/`, the sources that produced each report live next to it
+in a `code/` folder, and the figures in `figures/`.
