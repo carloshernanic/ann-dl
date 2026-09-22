@@ -70,6 +70,7 @@ data/spaceship-titanic/train.csv
 python docs/exercises/data/code/ex1_clouds.py
 python docs/exercises/data/code/ex2_nonlinearity.py
 python docs/exercises/data/code/ex3_spaceship.py
+python docs/exercises/perceptron/code/run_exercises.py
 ```
 
 Each script writes its figures to the sibling `figures/` folder and prints every

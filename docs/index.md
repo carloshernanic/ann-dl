@@ -41,7 +41,7 @@ Longer work lives under **[Projects](./projects/index.md)**.
 ## Status
 
 - [x] Data
-- [ ] Perceptron
+- [x] Perceptron
 - [ ] MLP
 - [ ] VAE
 - [ ] Project
