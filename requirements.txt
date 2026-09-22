@@ -19,3 +19,7 @@ pandas
 matplotlib
 scikit-learn
 tabulate          # pandas.DataFrame.to_markdown in the exercise scripts
+
+# Executing the notebooks under docs/**/code/
+nbconvert
+ipykernel

@@ -16,13 +16,15 @@ O fio condutor desta atividade é a **separabilidade**: o mesmo perceptron é
 treinado em dois datasets, um que o algoritmo resolve e um que ele não resolve,
 e o interessante não é que o segundo falhe, mas *como* falha.
 
-**Abordagem.** O perceptron foi escrito do zero, só com NumPy, em um módulo
-próprio (`code/perceptron.py`): ativação degrau, predição
+**Abordagem.** Todo o código está em um único notebook,
+[`code/perceptron.ipynb`](code/perceptron.ipynb), executado de ponta a ponta
+com as saídas gravadas. O perceptron foi escrito do zero, só com NumPy, como
+uma classe: ativação degrau, predição
 $\hat y = \text{step}(\mathbf{w}\cdot\mathbf{x} + b)$, regra de atualização
 dirigida pelo erro com rótulos $\{0, 1\}$ e o laço de treinamento com o critério
-de parada do enunciado. O mesmo módulo, sem nenhuma alteração, é usado nos dois
-exercícios pelo script `code/run_exercises.py`, que gera os dados, treina,
-produz as Figuras 1 a 6 e imprime todos os números citados abaixo. Regras
+de parada do enunciado. A mesma classe, sem nenhuma alteração, é usada nos dois
+exercícios; as células seguintes geram os dados, treinam, produzem as Figuras 1
+a 6 (salvas em `figures/`) e imprimem todos os números citados abaixo. Regras
 seguidas: `rng = np.random.default_rng(42)` como único gerador (dados,
 inicialização e permutação), nenhuma biblioteca fornece o modelo, todo gráfico
 tem título, rótulos e legenda.
@@ -44,13 +46,12 @@ prática, o que levou à ordem fixa acima, e interpretar o resultado do Exercíc
 2, em que a acurácia final ficou acima dos ~50 % que o enunciado antecipava
 (64.85 %). O item D.1 explica por quê.
 
-``` python
---8<-- "docs/exercises/perceptron/code/perceptron.py"
-```
+!!! note "Código"
 
-``` python
---8<-- "docs/exercises/perceptron/code/run_exercises.py"
-```
+    O notebook completo, com todas as células e saídas, está renderizado em
+    [`code/perceptron.ipynb`](code/perceptron.ipynb). Para reproduzir:
+    `jupyter nbconvert --to notebook --execute docs/exercises/perceptron/code/perceptron.ipynb`.
+    A classe do perceptron está reproduzida no item B abaixo.
 
 ---
 
@@ -72,8 +73,81 @@ vezes o desvio padrão de cada eixo ($0.71$), então as nuvens não se tocam.
 
 ### B — Implemente o perceptron
 
-A implementação está em `code/perceptron.py` (embutido acima). Os pontos que
-o enunciado exige:
+A implementação, tal como está no notebook (célula do item B):
+
+``` python
+def step(z):
+    """Ativação degrau: 1 se z >= 0, senão 0 (escalar ou vetor)."""
+    return (z >= 0).astype(int)
+
+
+class Perceptron:
+    """Perceptron de uma camada com a regra de atualização para rótulos {0, 1}."""
+
+    def __init__(self, rng, eta=0.01, max_epochs=100, w0=None):
+        self.rng = rng
+        self.eta = eta
+        self.max_epochs = max_epochs
+        # Inicialização NÃO nula: w ~ N(0, 0.01), b = 0.  Um w0 explícito
+        # permite repetir um treino mudando SOMENTE eta (item D.2) ou partir
+        # de w = 0 (item D.3).
+        self.w = rng.normal(0.0, 0.01, size=2) if w0 is None else np.array(w0, dtype=float)
+        self.b = 0.0
+
+    def predict(self, X):
+        """y_hat = step(w . x + b) para cada linha de X."""
+        return step(X @ self.w + self.b)
+
+    def accuracy(self, X, y):
+        return float(np.mean(self.predict(X) == y))
+
+    def fit(self, X, y, shuffle=False):
+        """Treina até uma época sem atualização ou até max_epochs."""
+        n = len(X)
+        self.history = {"acc": [], "pocket_acc": [], "updates": []}
+
+        # Bolso: melhor (w, b) já visto, avaliado no dataset completo.
+        self.pocket_w = self.w.copy()
+        self.pocket_b = self.b
+        self.pocket_acc = self.accuracy(X, y)
+        self.pocket_epoch = 0          # época (1-based) em que o melhor ocorreu
+        self.pocket_update = 0         # índice global da atualização que o produziu
+        n_updates_total = 0
+
+        self.epochs_run = 0
+        for epoch in range(1, self.max_epochs + 1):
+            order = self.rng.permutation(n) if shuffle else np.arange(n)
+            n_updates = 0
+            for i in order:
+                x_i, y_i = X[i], y[i]
+                y_hat = step(x_i @ self.w + self.b)      # predição para UMA amostra
+                error = y_i - y_hat                       # 0, +1 ou -1
+                if error != 0:                            # só erros atualizam
+                    self.w = self.w + self.eta * error * x_i
+                    self.b = self.b + self.eta * error
+                    n_updates += 1
+                    n_updates_total += 1
+                    # --- bolso: a única adição ao laço -------------------------
+                    acc_now = self.accuracy(X, y)
+                    if acc_now > self.pocket_acc:
+                        self.pocket_acc = acc_now
+                        self.pocket_w = self.w.copy()
+                        self.pocket_b = self.b
+                        self.pocket_epoch = epoch
+                        self.pocket_update = n_updates_total
+            self.epochs_run = epoch
+            self.history["acc"].append(self.accuracy(X, y))
+            self.history["pocket_acc"].append(self.pocket_acc)
+            self.history["updates"].append(n_updates)
+            if n_updates == 0:          # época inteira sem erro: convergiu
+                self.converged = True
+                break
+        else:
+            self.converged = False
+        return self.history
+```
+
+Os pontos que o enunciado exige:
 
 - **Predição.** $\hat y = \text{step}(\mathbf{w}\cdot\mathbf{x} + b)$, com
   $\text{step}(z) = 1$ se $z \ge 0$ e $0$ caso contrário (função `step`).

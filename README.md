@@ -70,12 +70,13 @@ data/spaceship-titanic/train.csv
 python docs/exercises/data/code/ex1_clouds.py
 python docs/exercises/data/code/ex2_nonlinearity.py
 python docs/exercises/data/code/ex3_spaceship.py
-python docs/exercises/perceptron/code/run_exercises.py
+jupyter nbconvert --to notebook --execute --inplace docs/exercises/perceptron/code/perceptron.ipynb
 ```
 
-Each script writes its figures to the sibling `figures/` folder and prints every
-number quoted in the report. The scripts locate the repository root themselves,
-so they can be run from any working directory.
+Each script or notebook writes its figures to the sibling `figures/` folder and
+prints every number quoted in the report. The scripts locate the repository
+root themselves, so they can be run from any working directory; the notebook
+must be executed from its own folder (which is what `nbconvert` does).
 
 ## Documentation
 
