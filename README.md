@@ -71,6 +71,7 @@ python docs/exercises/data/code/ex1_clouds.py
 python docs/exercises/data/code/ex2_nonlinearity.py
 python docs/exercises/data/code/ex3_spaceship.py
 jupyter nbconvert --to notebook --execute --inplace docs/exercises/perceptron/code/perceptron.ipynb
+jupyter nbconvert --to notebook --execute --inplace docs/exercises/mlp/code/mlp.ipynb
 ```
 
 Each script or notebook writes its figures to the sibling `figures/` folder and
