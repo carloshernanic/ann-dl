@@ -134,14 +134,11 @@ plugins:
       include: ["*.ipynb"]
 
 extra_javascript:
-  - https://unpkg.com/mathjax/es5/tex-mml-chtml.js
-  # - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js
-  - https://fastly.jsdelivr.net/npm/echarts/dist/echarts.min.js
-
-  # Para a implementação do mkdocs-jupyter
+  # A configuração do MathJax (delimitadores \( \), $$ e re-typeset na navegação
+  # instantânea do Material) tem de vir ANTES da biblioteca, e a biblioteca só
+  # pode ser carregada uma vez.
   - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
