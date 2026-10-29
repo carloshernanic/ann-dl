@@ -43,7 +43,7 @@ Longer work lives under **[Projects](./projects/index.md)**.
 - [x] Data
 - [x] Perceptron
 - [x] MLP
-- [ ] VAE
+- [x] VAE
 - [ ] Project
 
 ## Running the code

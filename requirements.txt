@@ -19,6 +19,9 @@ pandas
 matplotlib
 scikit-learn
 tabulate          # pandas.DataFrame.to_markdown in the exercise scripts
+scipy             # norm.ppf grid in the VAE exercise
+torch             # VAE exercise (CPU build is enough)
+torchvision       # MNIST loader for the VAE exercise
 
 # Executing the notebooks under docs/**/code/
 nbconvert

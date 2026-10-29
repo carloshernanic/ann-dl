@@ -72,7 +72,11 @@ python docs/exercises/data/code/ex2_nonlinearity.py
 python docs/exercises/data/code/ex3_spaceship.py
 jupyter nbconvert --to notebook --execute --inplace docs/exercises/perceptron/code/perceptron.ipynb
 jupyter nbconvert --to notebook --execute --inplace docs/exercises/mlp/code/mlp.ipynb
+jupyter nbconvert --to notebook --execute --inplace docs/exercises/vae/code/vae.ipynb
 ```
+
+The VAE notebook needs `torch` and `torchvision` (CPU is enough) and downloads
+MNIST into `data/mnist/` on first run.
 
 Each script or notebook writes its figures to the sibling `figures/` folder and
 prints every number quoted in the report. The scripts locate the repository
