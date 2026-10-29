@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/data/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/data/code/ex1_data/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/mlp/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/mlp/code/mlp/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/perceptron/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/perceptron/code/perceptron/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/exercises/vae/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
+    </url>
+    <url>
+         <loc>https://carloshernanic.github.io/ann-dl/exercises/vae/code/vae/</loc>
+         <lastmod>2026-10-29</lastmod>
     </url>
     <url>
          <loc>https://carloshernanic.github.io/ann-dl/projects/</loc>
-         <lastmod>2026-10-13</lastmod>
+         <lastmod>2026-10-29</lastmod>
     </url>
 </urlset>
